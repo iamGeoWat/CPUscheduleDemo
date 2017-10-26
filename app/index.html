@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<head xmlns="http://www.w3.org/1999/html">
+  <meta charset="utf-8">
+  <title>a simple illustration</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css">
+  <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+
+<body ng-app="myApp" ng-controller="ctrlBar">
+
+    <input type="checkbox" ng-model="isHide">
+    <input type="checkbox">
+    <div class="test-div" ng-hide="isHide"></div>
+    <md-divider class="area-divider">Experiment&Test Area</md-divider>
+
+    <md-button class="md-raised md-primary" ng-click="createAJob()">Create 1 Job</md-button>
+    <md-button class="md-raised md-primary" ng-click="createTenJobs()">Create 10 Jobs</md-button>
+    <md-content class="job-list">
+        <md-list>
+            <section ng-repeat="item in jobInfoList">
+                <md-subheader class="md-primary" md-colors="{background: 'blue'}">Job{{item.jobIndex}}</md-subheader>
+                <md-list-item ng-repeat="i in item.pcbInfo">
+                    <span>{{i.indexText}}{{i.pid}}</span>
+                    <md-divider></md-divider>
+                </md-list-item>
+            </section>
+        </md-list>
+    </md-content>
+
+  <!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+  -->
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="app.js"></script>
+  <script src="components/version/version.js"></script>
+  <script src="components/version/version-directive.js"></script>
+  <script src="components/version/interpolate-filter.js"></script>
+  <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular-animate.min.js"></script>
+  <script src="bower_components/angular-material/angular-material.min.js"></script>
+  <script src="bower_components/angular-material/angular-aria.min.js"></script>
+</body>
+</html>

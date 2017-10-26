@@ -1,0 +1,33 @@
+.test-div,
+.test-div.ng-hide-remove.ng-hide-remove-active,
+.test-div.ng-hide-add {
+  height: 100px;
+  width: 100px;
+  background-color: lightblue;
+  transition: all linear 1s;
+}
+
+.test-div.ng-hide-add.ng-hide-add-active,
+.test-div.ng-hide-remove {
+  height: 0;
+}
+
+.repeated-item {
+  border-bottom: 1px solid #ddd;
+  box-sizing: border-box;
+  height: 40px;
+  padding-top: 10px;
+}
+
+.job-list {
+  height: 600px;
+  width: 100%;
+  max-width: 300px;
+  border: 1px solid grey;
+}
+
+.area-divider {
+  margin-top: 10px;
+  color: grey;
+  margin-bottom: 50px;
+}
