@@ -19,7 +19,8 @@
   padding-top: 10px;
 }
 
-.job-list {
+.job-submit-list,
+.job-reserved-list {
   height: 600px;
   width: 100%;
   max-width: 300px;

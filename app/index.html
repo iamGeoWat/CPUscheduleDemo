@@ -11,26 +11,48 @@
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 
-<body ng-app="myApp" ng-controller="ctrlBar">
+<body ng-app="myApp" ng-controller="btnCtrl">
 
     <input type="checkbox" ng-model="isHide">
     <input type="checkbox">
     <div class="test-div" ng-hide="isHide"></div>
+    <p></p>
     <md-divider class="area-divider">Experiment&Test Area</md-divider>
 
     <md-button class="md-raised md-primary" ng-click="createAJob()">Create 1 Job</md-button>
     <md-button class="md-raised md-primary" ng-click="createTenJobs()">Create 10 Jobs</md-button>
-    <md-content class="job-list">
-        <md-list>
-            <section ng-repeat="item in jobInfoList">
-                <md-subheader class="md-primary" md-colors="{background: 'blue'}">Job{{item.jobIndex}}</md-subheader>
-                <md-list-item ng-repeat="i in item.pcbInfo">
-                    <span>{{i.indexText}}{{i.pid}}</span>
-                    <md-divider></md-divider>
-                </md-list-item>
-            </section>
-        </md-list>
-    </md-content>
+    <md-button class="md-raised md-primary" ng-click="startProc()">Start Processing</md-button>
+    <div layout="row">
+        <md-content class="job-submit-list">
+            <md-toolbar md-scroll-shrink>
+                <div class="md-toolbar-tools">Submitted</div>
+            </md-toolbar>
+            <md-list>
+                <section ng-repeat="item in jobSubmittedInfo.data">
+                    <md-subheader class="md-primary" md-colors="{background: 'blue'}">Job{{item.jobIndex}}: {{item.jobName}}</md-subheader>
+                    <md-list-item ng-repeat="i in item.pcbInfo">
+                        <span>{{i.indexText}}{{i.pid}}</span>
+                        <md-divider></md-divider>
+                    </md-list-item>
+                </section>
+            </md-list>
+        </md-content>
+
+        <md-content class="job-reserved-list">
+            <md-toolbar md-scroll-shrink>
+                <div class="md-toolbar-tools">Reserved</div>
+            </md-toolbar>
+            <md-list>
+                <section ng-repeat="item in jobReservedInfo.data">
+                    <md-subheader class="md-primary" md-colors="{background: 'blue'}">Job{{item.jobIndex}}: {{item.jobName}}</md-subheader>
+                    <md-list-item ng-repeat="i in item.pcbInfo">
+                        <span>{{i.indexText}}{{i.pid}}</span>
+                        <md-divider></md-divider>
+                    </md-list-item>
+                </section>
+            </md-list>
+        </md-content>
+    </div>
 
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
@@ -38,9 +60,11 @@
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="app.js"></script>
+  <!--
   <script src="components/version/version.js"></script>
   <script src="components/version/version-directive.js"></script>
   <script src="components/version/interpolate-filter.js"></script>
+  -->
   <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular-animate.min.js"></script>
   <script src="bower_components/angular-material/angular-material.min.js"></script>
   <script src="bower_components/angular-material/angular-aria.min.js"></script>
