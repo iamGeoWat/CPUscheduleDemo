@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head xmlns="http://www.w3.org/1999/html">
   <meta charset="utf-8">
-  <title>a simple illustration</title>
+  <title>CPU Scheduling</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
@@ -11,13 +11,7 @@
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 
-<body ng-app="myApp" ng-controller="btnCtrl">
-
-    <input type="checkbox" ng-model="isHide">
-    <input type="checkbox">
-    <div class="test-div" ng-hide="isHide"></div>
-    <p></p>
-    <md-divider class="area-divider">Experiment&Test Area</md-divider>
+<body ng-app="myApp" ng-controller="myCtrl">
 
     <md-button class="md-raised md-primary" ng-click="createAJob()">Create 1 Job</md-button>
     <md-button class="md-raised md-primary" ng-click="createTenJobs()">Create 10 Jobs</md-button>
@@ -31,7 +25,7 @@
                 <section ng-repeat="item in jobSubmittedInfo.data">
                     <md-subheader class="md-primary" md-colors="{background: 'blue'}">Job{{item.jobIndex}}: {{item.jobName}}</md-subheader>
                     <md-list-item ng-repeat="i in item.pcbInfo">
-                        <span>{{i.indexText}}{{i.pid}}</span>
+                        <span>{{i.indexText}}.{{i.pid}}</span>
                         <md-divider></md-divider>
                     </md-list-item>
                 </section>
@@ -46,17 +40,62 @@
                 <section ng-repeat="item in jobReservedInfo.data">
                     <md-subheader class="md-primary" md-colors="{background: 'blue'}">Job{{item.jobIndex}}: {{item.jobName}}</md-subheader>
                     <md-list-item ng-repeat="i in item.pcbInfo">
-                        <span>{{i.indexText}}{{i.pid}}</span>
+                        <span>{{i.indexText}}.{{i.pid}}</span>
                         <md-divider></md-divider>
                     </md-list-item>
                 </section>
             </md-list>
         </md-content>
+
+
+        <md-content class="degree-content" flex">
+            <md-toolbar md-scroll-shrink>
+                <div class="md-toolbar-tools">Degrees</div>
+            </md-toolbar>
+            <md-card ng-repeat="item in degrees track by $index">
+                <md-card-title  ng-class="degreeClass[$index]">
+                    <md-card-title-text>
+                        <span class="md-headline">{{item.indexText}}.{{item.pid}}</span>
+                        <md-card-content>
+                            <p>Priority - {{item.priority}}<br>RunningTime - {{item.time}}<br>Status - {{item.strStatus}}</p>
+                        </md-card-content>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-divider><p class="divider-text">the {{$index + 1}}th degree of process</p></md-divider>
+                <md-card-actions>
+                    <md-button class="md-raised md-warn suspend-btn" ng-click="toggleSuspend($index)">{{btnName[$index]}}</md-button>
+                </md-card-actions>
+            </md-card>
+        </md-content>
+
+        <md-content class="cpu-content" flex>
+            <md-toolbar>
+                <div class="md-toolbar-tools">CPU</div>
+            </md-toolbar>
+            <md-card>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">{{cpuInfo.indexText}}.{{cpuInfo.pid}}</span>
+                        <md-card-content>
+                            <p>Priority - {{cpuInfo.priority}}<br>RunningTime - {{cpuInfo.time}}<br>Status - {{cpuInfo.strStatus}}</p>
+                        </md-card-content>
+                    </md-card-title-text>
+                </md-card-title>
+            </md-card>
+        </md-content>
     </div>
 
-  <!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-  -->
+
+
+    <md-divider class="area-divider">Experiment&Test Area</md-divider>
+    <input type="checkbox" ng-model="isHide">
+    <input type="checkbox">
+    <div class="test-div" ng-hide="isHide"></div>
+    <p></p>
+
+    <!-- In production use:
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+    -->
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="app.js"></script>

@@ -23,7 +23,7 @@
 .job-reserved-list {
   height: 600px;
   width: 100%;
-  max-width: 300px;
+  max-width: 200px;
   border: 1px solid grey;
 }
 
@@ -31,4 +31,38 @@
   margin-top: 10px;
   color: grey;
   margin-bottom: 50px;
+}
+
+.degree-content {
+  width: 100%;
+  max-width: 300px;
+  border: 1px solid grey;
+  margin-left: 20px;
+}
+
+.cpu-content {
+  height: 100%;
+  width: 100%;
+  max-width: 300px;
+  border: 1px solid grey;
+}
+
+.normal {
+
+}
+
+.suspend {
+  background-color: #F44336;
+  filter:blur(1px);
+  -webkit-filter:blur(1px);
+  -ms-filter:blur(1px);
+  opacity: 0.5;
+}
+
+.divider-text {
+  margin-left: 10px;
+}
+
+.suspend-btn {
+  float: right;
 }

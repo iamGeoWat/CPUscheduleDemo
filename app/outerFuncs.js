@@ -1,8 +1,25 @@
-function Pcb(pidName, pidNum) {
+function Pcb(pidName, pidNum, status, time, priority, strStatus) {
   var obj = {};
-  obj.pidName = pidName;
-  obj.pidNum = pidNum;
-  obj.pid = pidName + pidNum;
+  obj.priority = priority;//int 1-10, for sort in degrees@process schedule
+  obj.time = time;//int 1-10, running time for time-slice
+  obj.pidName = pidName; //string
+  obj.pidNum = pidNum; //int
+  obj.pid = pidName + pidNum; //string
+  obj.status = status;//int 0-3
+  obj.strStatus = strStatus;
+  obj.getStatus = function () {
+    switch (obj.status) {
+      case 0:
+        return "New";
+      case 1:
+        return "Ready";
+      case 2:
+        return "Running";
+      case 3:
+        return "Suspend";
+    }
+  }; //get status in string80
+  
   //obj.status = status;
   //obj.priority = priority;
   return obj;
@@ -19,7 +36,7 @@ function getRandName() {
   return nameToReturn;
 }
 
-function Stack(){
+function MyArr(){
   var obj = {};
   obj.data = [];
   obj.shift = function () {
