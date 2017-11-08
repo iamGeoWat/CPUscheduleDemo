@@ -55,7 +55,7 @@ function MyArr(){
   };
   //获取栈顶元素
   obj.top = function(){
-    return obj.data[obj.data.length-1];
+    return obj.data[0];
   };
   //获取栈长
   obj.size = function(){

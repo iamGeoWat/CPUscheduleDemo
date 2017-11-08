@@ -12,6 +12,7 @@ app.controller('myCtrl', function ($scope) {
   
   $scope.jobReserved = [];
   $scope.jobReservedInfo = new MyArr();
+  $scope.terminatedList = [];
   $scope.degrees = [$scope.emptyPCB, $scope.emptyPCB, $scope.emptyPCB, $scope.emptyPCB, $scope.emptyPCB, $scope.emptyPCB];
   $scope.cpuInfo = $scope.emptyPCB;
   $scope.suspendProcess = [];
@@ -111,6 +112,9 @@ app.controller('myCtrl', function ($scope) {
         $scope.cpuInfo.time = $scope.cpuInfo.time - 1;
       }
       if ($scope.cpuInfo.time === 0) {
+        if ($scope.cpuInfo.pid !== "Empty0") {
+          $scope.terminatedList.push($scope.cpuInfo);
+        }
         $scope.cpuInfo = $scope.emptyPCB;
       }//a running cpu
     }, 1000); //检测提交的job，把提交的job放到保留中
@@ -118,6 +122,8 @@ app.controller('myCtrl', function ($scope) {
     setInterval(function () {
       for (var i=0; i<6; i++) {
         if ($scope.jobReservedInfo.top() !== undefined && $scope.degrees[i].pid === "Empty0") {
+          $scope.jobReservedInfo.top().pcbInfo[0].status = 1;
+          $scope.jobReservedInfo.top().pcbInfo[0].strStatus = "Ready";
           $scope.degrees[i] = $scope.jobReservedInfo.top().pcbInfo.shift();
           $scope.sortDegrees();
           if ($scope.jobReservedInfo.top().pcbInfo[0] === undefined) {
@@ -128,15 +134,6 @@ app.controller('myCtrl', function ($scope) {
     }, 100); //job schedule@FCFS
     
     setInterval(function () {
-      
-      angular.forEach($scope.degrees, function (data) {
-        if (data.status === 0) {
-          data.status = 1;
-          data.strStatus = "Ready";
-        }
-      });
-      //, switch status to ready
-      
       
       for (var i=0; i<6; i++) {
         if ($scope.cpuInfo.pid === "Empty0" && $scope.degrees[i].pid !== "Empty0" && $scope.degrees[i].status !== 3) {

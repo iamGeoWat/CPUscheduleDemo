@@ -11,12 +11,12 @@
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 
-<body ng-app="myApp" ng-controller="myCtrl">
+<body ng-app="myApp" ng-controller="myCtrl" ng-cloak>
 
-    <md-button class="md-raised md-primary" ng-click="createAJob()">Create 1 Job</md-button>
-    <md-button class="md-raised md-primary" ng-click="createTenJobs()">Create 10 Jobs</md-button>
+    <md-button class="md-raised" ng-click="createAJob()">Create 1 Job</md-button>
+    <md-button class="md-raised" ng-click="createTenJobs()">Create 10 Jobs</md-button>
     <md-button class="md-raised md-primary" ng-click="startProc()">Start Processing</md-button>
-    <div layout="row">
+    <div layout="row" class="displayBody">
         <md-content class="job-submit-list">
             <md-toolbar md-scroll-shrink>
                 <div class="md-toolbar-tools">Submitted</div>
@@ -47,12 +47,11 @@
             </md-list>
         </md-content>
 
-
-        <md-content class="degree-content" flex">
+        <md-content class="degree-content" layout="row" layout-wrap>
             <md-toolbar md-scroll-shrink>
                 <div class="md-toolbar-tools">Degrees</div>
             </md-toolbar>
-            <md-card ng-repeat="item in degrees track by $index">
+            <md-card class="degree-card" ng-repeat="item in degrees track by $index" flex="30">
                 <md-card-title  ng-class="degreeClass[$index]">
                     <md-card-title-text>
                         <span class="md-headline">{{item.indexText}}.{{item.pid}}</span>
@@ -61,38 +60,55 @@
                         </md-card-content>
                     </md-card-title-text>
                 </md-card-title>
-                <md-divider><p class="divider-text">the {{$index + 1}}th degree of process</p></md-divider>
+                <md-divider><p class="divider-text">{{$index + 1}}th degree</p></md-divider>
                 <md-card-actions>
                     <md-button class="md-raised md-warn suspend-btn" ng-click="toggleSuspend($index)">{{btnName[$index]}}</md-button>
                 </md-card-actions>
             </md-card>
         </md-content>
 
-        <md-content class="cpu-content" flex>
-            <md-toolbar>
-                <div class="md-toolbar-tools">CPU</div>
-            </md-toolbar>
-            <md-card>
-                <md-card-title>
-                    <md-card-title-text>
-                        <span class="md-headline">{{cpuInfo.indexText}}.{{cpuInfo.pid}}</span>
-                        <md-card-content>
-                            <p>Priority - {{cpuInfo.priority}}<br>RunningTime - {{cpuInfo.time}}<br>Status - {{cpuInfo.strStatus}}</p>
-                        </md-card-content>
-                    </md-card-title-text>
-                </md-card-title>
-            </md-card>
-        </md-content>
+
+        <div layout="column" style="margin-left: 10px;">
+            <md-content class="cpu-content">
+                <md-toolbar>
+                    <div class="md-toolbar-tools">CPU</div>
+                </md-toolbar>
+                <md-card>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">{{cpuInfo.indexText}}.{{cpuInfo.pid}}</span>
+                            <md-card-content>
+                                <p>Priority - {{cpuInfo.priority}}<br>RunningTime - {{cpuInfo.time}}<br>Status - {{cpuInfo.strStatus}}</p>
+                            </md-card-content>
+                        </md-card-title-text>
+                    </md-card-title>
+                </md-card>
+            </md-content>
+
+            <md-content class="terminated-list">
+                <md-toolbar md-scroll-shrink>
+                    <div class="md-toolbar-tools">Terminated</div>
+                </md-toolbar>
+                <md-list>
+                    <section ng-repeat="item in terminatedList">
+                        <md-list-item>
+                            <span>{{item.pid}}</span>
+                            <md-divider></md-divider>
+                        </md-list-item>
+                    </section>
+                </md-list>
+            </md-content>
+        </div>
     </div>
 
 
-
+<!--
     <md-divider class="area-divider">Experiment&Test Area</md-divider>
     <input type="checkbox" ng-model="isHide">
     <input type="checkbox">
     <div class="test-div" ng-hide="isHide"></div>
     <p></p>
-
+-->
     <!-- In production use:
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
     -->

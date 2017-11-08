@@ -34,16 +34,13 @@
 }
 
 .degree-content {
-  width: 100%;
-  max-width: 300px;
   border: 1px solid grey;
-  margin-left: 20px;
+  margin-left: 10px;
 }
 
 .cpu-content {
-  height: 100%;
-  width: 100%;
-  max-width: 300px;
+  height: 250px;
+  width: 250px;
   border: 1px solid grey;
 }
 
@@ -60,9 +57,27 @@
 }
 
 .divider-text {
-  margin-left: 10px;
+  margin-left: 20px;
+  font-size: large;
+
 }
 
 .suspend-btn {
   float: right;
+}
+
+.terminated-list {
+  height: 350px;
+  width: 250px;
+  border: 1px solid grey;
+}
+
+.degree-card {
+  width: 300px;
+  height: 300px;
+}
+
+.displayBody {
+  height: 100%;
+  width: 100%;
 }
