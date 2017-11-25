@@ -1,6 +1,37 @@
 document.write("<script src='outerFuncs.js'></script>'");
 
+function loadCss( url ){
+  var link = document.createElement( "link" );
+  link.type = "text/css";
+  link.rel = "stylesheet";
+  link.href = url;
+  document.getElementsByTagName( "head" )[0].appendChild( link );
+}
+
+function browserRedirect() {
+  var sUserAgent = navigator.userAgent.toLowerCase();
+  var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+  var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+  var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+  var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+  var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+  var bIsAndroid = sUserAgent.match(/android/i) == "android";
+  var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+  var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+  //document.writeln("您的浏览设备为：");
+  if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+    loadCss( "appmobile.css" );
+    //document.writeln("phone");
+  } else {
+    loadCss( "app.css" );
+    //document.writeln("pc");
+  }
+}
+browserRedirect();
 // Declare app level module which depends on views, and components
+
+
+
 var app = angular.module('myApp', ['ngAnimate', 'ngMaterial']);
 
 app.controller('myCtrl', function ($scope) {
@@ -25,6 +56,8 @@ app.controller('myCtrl', function ($scope) {
     $scope.osRamSection = new RamSection(0, 3548, 1, "OS");
     $scope.freeRamSection = new RamSection(3549, 19600, 0, "Free");
     $scope.ramTable = [$scope.osRamSection, $scope.freeRamSection];
+    $scope.clockSpeed = 100;
+    $scope.ifBoost = false;
   }
   //此控制器的全局变量
   $scope.insertArray = function (item, array, index) {
@@ -155,7 +188,7 @@ app.controller('myCtrl', function ($scope) {
             $scope.sortDegrees();
             clearInterval(tryReallocate);
           }
-        }, 1000);
+        }, $scope.clockSpeed/10);
       }
       
       //$scope.suspendProcess.unshift($scope.degrees[$index]);
@@ -205,6 +238,14 @@ app.controller('myCtrl', function ($scope) {
     return false;
   };
   
+  $scope.toggleBoost = function () {
+    if ($scope.clockSpeed === 1000) {
+      $scope.clockSpeed = 100;
+    } else {
+      $scope.clockSpeed = 1000;
+    }
+  };
+  
   $scope.startProc = function () {
     
     setInterval(function () {
@@ -238,7 +279,7 @@ app.controller('myCtrl', function ($scope) {
         }
         $scope.cpuInfo = $scope.emptyPCB;
       }//a running cpu
-    }, 1000);
+    }, $scope.clockSpeed);
     
     setInterval(function () {
       for (var i=0; i<6; i++) {
@@ -253,7 +294,7 @@ app.controller('myCtrl', function ($scope) {
           break;
         }
       }
-    }, 500); //job schedule@FCFS
+    }, $scope.clockSpeed/2); //job schedule@FCFS
     
     setInterval(function () {
       

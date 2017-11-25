@@ -6,16 +6,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
-  <link rel="stylesheet" href="app.css">
   <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css">
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+  <script>
+
+  </script>
 </head>
 
 <body ng-app="myApp" ng-controller="myCtrl" ng-cloak>
+    <div layout="row">
+        <md-button class="md-raised" ng-click="createAJob()">Create 1 Job</md-button>
+        <md-button class="md-raised" ng-click="createTenJobs()">Create 10 Jobs</md-button>
+        <md-button class="md-raised md-primary" ng-click="startProc()">Start Processing</md-button>
 
-    <md-button class="md-raised" ng-click="createAJob()">Create 1 Job</md-button>
-    <md-button class="md-raised" ng-click="createTenJobs()">Create 10 Jobs</md-button>
-    <md-button class="md-raised md-primary" ng-click="startProc()">Start Processing</md-button>
+    </div>
     <div layout="row" class="displayBody">
         <md-content class="job-submit-list">
             <md-toolbar md-scroll-shrink>
@@ -106,16 +110,16 @@
     <div>
         <md-content class="ram-content">
             <md-toolbar md-scroll-shrink>
-                <div class="md-toolbar-tools">RAM</div>
+                <div class="md-toolbar-tools">Memory</div>
             </md-toolbar>
             <div class="ram-body">
                 <div ng-repeat="item in ramTable" ng-class="{0: 'ram-sec-free', 1: 'ram-sec-using'}[item.status]" ng-style="item.class" layout="column">
                     <div flex>
-                        <label class="ram-section-start" style="float: left; font-size: 20px; color: #FFFFFF;">{{item.start}}</label>
-                        <label class="ram-section-end" style="float: right; font-size: 20px; color: #FFFFFF;">{{item.end}}</label>
+                        <label class="ram-section-start" style="float: left; font-size: 15px; ">{{item.start}}</label>
+                        <label class="ram-section-end" style="float: right; font-size: 15px; ">{{item.end}}</label>
                     </div>
                     <div>
-                        <label class="ram-section-name" style="font-size: 20px; color: #FFFFFF;">{{item.name}}</label>
+                        <label class="ram-section-name" style="font-size: 15px; ">{{item.name}}</label>
                     </div>
                 </div>
             </div>
