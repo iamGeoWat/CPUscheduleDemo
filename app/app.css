@@ -21,27 +21,34 @@
 
 .job-submit-list,
 .job-reserved-list {
-  height: 600px;
+  height: 500px;
   width: 100%;
   max-width: 200px;
   border: 1px solid grey;
+  margin-left: 5px;
 }
 
 .area-divider {
-  margin-top: 10px;
-  color: grey;
-  margin-bottom: 50px;
+
+}
+
+.divider-text {
+  margin-left: 20px;
+  font-size: large;
 }
 
 .degree-content {
   border: 1px solid grey;
-  margin-left: 10px;
+  margin-left: 5px;
+  height: 500px;
+  width: 750px;
 }
 
 .cpu-content {
-  height: 250px;
+  height: 255px;
   width: 250px;
   border: 1px solid grey;
+  margin-left: -5px;
 }
 
 .normal {
@@ -56,10 +63,12 @@
   opacity: 0.5;
 }
 
-.divider-text {
-  margin-left: 20px;
-  font-size: large;
-
+.waiting {
+  background-color: #2196F3;
+  filter:blur(1px);
+  -webkit-filter:blur(1px);
+  -ms-filter:blur(1px);
+  opacity: 0.5;
 }
 
 .suspend-btn {
@@ -67,17 +76,45 @@
 }
 
 .terminated-list {
-  height: 350px;
+  height: 245px;
   width: 250px;
   border: 1px solid grey;
+  margin-left: -5px;
 }
 
 .degree-card {
   width: 300px;
-  height: 300px;
+  height: 200px;
 }
 
 .displayBody {
-  height: 100%;
   width: 100%;
+}
+
+.ram-content {
+  border: 1px solid black;
+  margin-top: 5px;
+  margin-left: 5px;
+  width: 99%;
+}
+
+.ram-body{
+  display: flex;
+  width: 100%;
+}
+
+.ram-sec-free {
+  background-color: #4CAF50;
+  width: 100px;
+  border: solid 1px grey;
+  height: 100px;
+  min-width: 100px;
+}
+
+.ram-sec-using {
+  background-color: #F44336;
+  width: 100px;
+  border: solid 1px grey;
+  height: 100px;
+  min-width: 100px;
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head xmlns="http://www.w3.org/1999/html">
   <meta charset="utf-8">
-  <title>CPU Scheduling</title>
+  <title>OS</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
@@ -60,8 +60,9 @@
                         </md-card-content>
                     </md-card-title-text>
                 </md-card-title>
-                <md-divider><p class="divider-text">{{$index + 1}}th degree</p></md-divider>
+                <md-divider class="area-divider"></md-divider>
                 <md-card-actions>
+                    <label class="divider-text">{{$index + 1}}th degree</label>
                     <md-button class="md-raised md-warn suspend-btn" ng-click="toggleSuspend($index)">{{btnName[$index]}}</md-button>
                 </md-card-actions>
             </md-card>
@@ -74,6 +75,7 @@
                     <div class="md-toolbar-tools">CPU</div>
                 </md-toolbar>
                 <md-card>
+                    <md-progress-linear md-mode="determinate" value="{{(1-(cpuInfo.time/originalTime))*100}}"></md-progress-linear>
                     <md-card-title>
                         <md-card-title-text>
                             <span class="md-headline">{{cpuInfo.indexText}}.{{cpuInfo.pid}}</span>
@@ -99,6 +101,25 @@
                 </md-list>
             </md-content>
         </div>
+    </div>
+
+    <div>
+        <md-content class="ram-content">
+            <md-toolbar md-scroll-shrink>
+                <div class="md-toolbar-tools">RAM</div>
+            </md-toolbar>
+            <div class="ram-body">
+                <div ng-repeat="item in ramTable" ng-class="{0: 'ram-sec-free', 1: 'ram-sec-using'}[item.status]" ng-style="item.class" layout="column">
+                    <div flex>
+                        <label class="ram-section-start" style="float: left; font-size: 20px; color: #FFFFFF;">{{item.start}}</label>
+                        <label class="ram-section-end" style="float: right; font-size: 20px; color: #FFFFFF;">{{item.end}}</label>
+                    </div>
+                    <div>
+                        <label class="ram-section-name" style="font-size: 20px; color: #FFFFFF;">{{item.name}}</label>
+                    </div>
+                </div>
+            </div>
+        </md-content>
     </div>
 
 

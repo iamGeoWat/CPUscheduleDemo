@@ -1,0 +1,39 @@
+definitions:
+the total ram is about 12000;
+os size is 3538;
+from 0 - 3548 is os;
+from 3549 - 15000 is the original hole;
+the ram size of each process is 1500 - 2500;
+the ram table {
+ramSection {
+    int start = {0};
+    int end = {3548};
+    //each has a pair;
+    int status;
+    int strStatus;
+    string class;
+    //int[] holeStart = {3549};
+    //int[] holeEnd= {15000};
+    }
+}
+
+
+when get in the degrees
+if ram is enough && any degree is empty
+    find big enough hole start from os_end to ram_end(15000)
+    allocate;
+    get in degrees
+
+when get out cpu
+    update inUseTable
+    bind newly emptied ram with existed hole
+
+when suspend
+    move it out of the ram
+    update inUseTable
+    bind newly emptied ram with existed hole
+
+when de-suspend
+    find big enough hole start from os_end to ram_end(15000)
+    allocate;
+    toggleSuspend();
