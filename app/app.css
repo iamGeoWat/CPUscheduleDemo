@@ -21,7 +21,7 @@
 
 .job-submit-list,
 .job-reserved-list {
-  height: 500px;
+  height: 550px;
   width: 100%;
   max-width: 200px;
   border: 1px solid grey;
@@ -40,7 +40,7 @@
 .degree-content {
   border: 1px solid grey;
   margin-left: 5px;
-  height: 500px;
+  height: 550px;
   width: 750px;
 }
 
@@ -76,7 +76,7 @@
 }
 
 .terminated-list {
-  height: 245px;
+  height: 290px;
   width: 250px;
   border: 1px solid grey;
   margin-left: -5px;
@@ -84,7 +84,7 @@
 
 .degree-card {
   width: 300px;
-  height: 200px;
+  height: 220px;
 }
 
 .displayBody {
@@ -95,7 +95,8 @@
   border: 1px solid black;
   margin-top: 5px;
   margin-left: 5px;
-  width: 99%;
+  width: 1420px;
+  margin-right: 5px;
 }
 
 .ram-body{

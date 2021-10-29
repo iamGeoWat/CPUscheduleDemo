@@ -20,8 +20,7 @@ function browserRedirect() {
   var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
   //document.writeln("您的浏览设备为：");
   if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
-    loadCss( "appmobile.css" );
-    //document.writeln("phone");
+    document.writeln("请用电脑打开！");
   } else {
     loadCss( "app.css" );
     //document.writeln("pc");
@@ -56,10 +55,11 @@ app.controller('myCtrl', function ($scope) {
     $scope.osRamSection = new RamSection(0, 3548, 1, "OS");
     $scope.freeRamSection = new RamSection(3549, 19600, 0, "Free");
     $scope.ramTable = [$scope.osRamSection, $scope.freeRamSection];
-    $scope.clockSpeed = 100;
-    $scope.ifBoost = false;
+    $scope.clockSpeed = 1000;
+    $scope.ifBoost = "Off";
   }
   //此控制器的全局变量
+  
   $scope.insertArray = function (item, array, index) {
     var left = array.slice(0, index);
     var right = array.slice(index, array.length);
@@ -248,7 +248,7 @@ app.controller('myCtrl', function ($scope) {
   
   $scope.startProc = function () {
     
-    setInterval(function () {
+    $scope.lowSpeedThread = setInterval($scope.lowThreadFunc = function () {
       
       if ($scope.jobSubmittedInfo.top() !== undefined) {
         $scope.jobReservedInfo.push($scope.jobSubmittedInfo.shift());
@@ -281,7 +281,7 @@ app.controller('myCtrl', function ($scope) {
       }//a running cpu
     }, $scope.clockSpeed);
     
-    setInterval(function () {
+    $scope.midSpeedThread = setInterval($scope.midThreadFunc = function () {
       for (var i=0; i<6; i++) {
         if ($scope.jobReservedInfo.top() !== undefined && $scope.degrees[i].pid === "Empty0" && $scope.ramAllocation($scope.jobReservedInfo.top().pcbInfo[0])) {
           $scope.jobReservedInfo.top().pcbInfo[0].status = 1;
@@ -296,7 +296,7 @@ app.controller('myCtrl', function ($scope) {
       }
     }, $scope.clockSpeed/2); //job schedule@FCFS
     
-    setInterval(function () {
+    $scope.highSpeedThread = setInterval($scope.highThreadFunc = function () {
       
       for (var i=0; i<6; i++) {
         if ($scope.cpuInfo.pid === "Empty0" && $scope.degrees[i].pid !== "Empty0" && $scope.degrees[i].status !== 3) {
@@ -311,7 +311,29 @@ app.controller('myCtrl', function ($scope) {
       
       $scope.$digest();
     }, 10);
-  }
+  };
+  
+  $scope.cpuBoost = function () {
+    if ($scope.clockSpeed === 1000) {
+      clearInterval($scope.lowSpeedThread);
+      clearInterval($scope.midSpeedThread);
+      clearInterval($scope.highSpeedThread);
+      $scope.clockSpeed = 100;
+      $scope.ifBoost = "On";
+      $scope.lowSpeedThread = setInterval($scope.lowThreadFunc, $scope.clockSpeed);
+      $scope.midSpeedThread = setInterval($scope.midThreadFunc, $scope.clockSpeed/2);
+      $scope.highSpeedThread = setInterval($scope.highThreadFunc, 10);
+    } else {
+      clearInterval($scope.lowSpeedThread);
+      clearInterval($scope.midSpeedThread);
+      clearInterval($scope.highSpeedThread);
+      $scope.clockSpeed = 1000;
+      $scope.ifBoost = "Off";
+      $scope.lowSpeedThread = setInterval($scope.lowThreadFunc, $scope.clockSpeed);
+      $scope.midSpeedThread = setInterval($scope.midThreadFunc, $scope.clockSpeed/2);
+      $scope.highSpeedThread = setInterval($scope.highThreadFunc, 10);
+    }
+  };
 });
 
 //改一下array的存放方式，把方法写在外面，让数据存在一个纯粹的数组里。
