@@ -2,7 +2,7 @@
 
 ```
 npm install
-bower install // use angular 1.5.x please
+bower install // use angular 1.5.x
 npm start
 
 goto http://localhost:8000
